@@ -1,13 +1,12 @@
-<html>
-	<head><title>Dr. Fonkam's blog</title></head>
-	<p><em>Hi there!</em></p>
-	<p>It works!</p>
-	<p><h1>Some Posts:</h1>
-		{% for post in posts %}
-		 <div>
-		 	<p>published: {{ post.published_date }} </p>
-		 	<h1><a href="">{{ post.title }}</a></h1>
-			<p>{{ post.text|linebreaks }} </p>
-		 </div>	
-		{% endfor %}
-</html>
+{% extends "blog/base.html" %}
+{% block content %}
+	{% for post in posts %}
+	    <div class="post">
+	        <div class="date">
+	            {{ post.published_date }}
+	        </div>
+	        <h1><a href="{% url "blog.views.post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
+	        <p>{{ post.text|linebreaks }}</p>
+	    </div>
+	{% endfor %}
+{% endblock content %}
